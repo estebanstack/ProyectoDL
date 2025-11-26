@@ -1,4 +1,4 @@
-# 📘 DLang – Mini lenguaje para Cálculo Numérico, Gráficas y Redes Neuronales
+# DLang – Lenguaje de dominio especifico para realizar procesos de Deep Learning
 
 ## 1. Descripción general
 
@@ -10,11 +10,11 @@ DLang funciona gracias a:
 * Un **intérprete propio** en Python (Visitor).
 * Bibliotecas internas implementadas totalmente a mano.
 
-El resultado es un mini-lenguaje completo con:
+El resultado es un lenguaje completo con:
 
 * Aritmética, trigonometría, raíces.
 * Matrices: suma, resta, multiplicación, transpuesta, inversa.
-* Archivos simulados (sin `open()` real).
+* Archivos simulados.
 * Gráficas ASCII estilo matplotlib.
 * Regresión lineal.
 * Perceptrón multicapa (MLP) desde cero.
@@ -22,19 +22,7 @@ El resultado es un mini-lenguaje completo con:
 
 ---
 
-## 2. Requisitos
-
-* Python **3.10+**
-* ANTLR4 instalado globalmente:
-
-  ```bash
-  pip install antlr4-python3-runtime
-  ```
-* Ejecutable de ANTLR (`antlr4` o `antlr4.bat` en Windows)
-
----
-
-## 3. Compilación de la gramática
+## 2. Compilación de la gramática
 
 El archivo central del lenguaje es:
 
@@ -50,7 +38,7 @@ antlr4 -Dlanguage=Python3 -visitor DLang.g4
 
 ---
 
-## 4. Ejecución del intérprete
+## 3. Ejecución del intérprete
 
 ### Ejecutar un programa `.dl`:
 
@@ -66,9 +54,9 @@ python Main.py
 
 ---
 
-## 5. Estructura del proyecto
+## 4. Estructura del proyecto
 
-### 5.1 Núcleo del lenguaje
+### 4.1 Núcleo del lenguaje
 
 | Archivo            | Descripción                                             |
 | ------------------ | ------------------------------------------------------- |
@@ -84,9 +72,9 @@ EvalVisitor:
 
 ---
 
-## 5.2 Bibliotecas internas implementadas a mano
+## 4.2 Bibliotecas internas implementadas a mano
 
-### 🔢 MyMath.py
+### MyMath.py
 
 * Implementación manual de:
 
@@ -99,7 +87,7 @@ Sin usar `math`.
 
 ---
 
-### 📐 Matrix.py
+### Matrix.py
 
 Soporte completo para matrices:
 
@@ -113,9 +101,8 @@ En el lenguaje, las listas dobles `[ [..], [..] ]` se interpretan como matrices 
 
 ---
 
-### 📁 MyFile.py — Filesystem simulado
+### MyFile.py — Filesystem simulado
 
-Sin usar `open()`.
 Usa un diccionario interno:
 
 ```python
@@ -131,7 +118,7 @@ Funciones:
 
 ---
 
-### 📊 MyPlot.py – Motor de gráficos ASCII estilo matplotlib
+### MyPlot.py – Motor de gráficos ASCII estilo matplotlib
 
 Este módulo replica una API similar a `matplotlib.pyplot`, pero todo se imprime en ASCII:
 
@@ -156,7 +143,7 @@ Características:
 
 ---
 
-### 📈 MyRegression.py
+### MyRegression.py
 
 Implementa regresión lineal:
 
@@ -167,13 +154,13 @@ Sin librerías, usando las fórmulas de mínimos cuadrados.
 
 ---
 
-### 🧠 MyMLP.py — Perceptrón Multicapa
+### MyMLP.py — Perceptrón Multicapa
 
-Red neuronal hecha 100% a mano:
+Red neuronal que tiene:
 
 * Función de activación: sigmoide implementada con Taylor.
 * Backpropagation manual.
-* Inicialización determinista (no se usa random).
+* Inicialización determinista.
 * Métodos:
 
   * `train(X, Y, lr, epochs)`
@@ -184,7 +171,7 @@ Se usa para aprender el problema XOR.
 
 ---
 
-### 🌐 MyClusterNN.py – Red competitiva
+### MyClusterNN.py – Red competitiva
 
 Una red tipo "k-means neural":
 
@@ -195,7 +182,7 @@ Una red tipo "k-means neural":
 
 ---
 
-## 6. Sintaxis del DSL
+## 5. Sintaxis del DSL
 
 ### Variables:
 
@@ -234,7 +221,7 @@ while i < 5 {
 
 ---
 
-## 7. Ejemplos completos
+## 6. Ejemplos completos
 
 ### Regresión + gráfica ASCII
 
@@ -245,7 +232,6 @@ ys = [2,3,5,4,5]
 params = regresion_lineal(xs, ys)
 ys_pred = predecir_lineal(xs, params)
 
-figure(60,20)
 plot(xs, ys, label="Datos")
 plot(xs, ys_pred, label="Predicción")
 title("Regresión Lineal")
@@ -267,35 +253,15 @@ print(predict_mlp(m, X))
 
 ---
 
-## 8. Decisiones de diseño
+## 7. Decisiones de diseño
 
-* No usar ninguna librería externa **por requerimiento del proyecto**.
+* No usar ninguna librería externa.
 * Implementar todo desde cero:
 
   * Trigonometría
   * Algebra lineal
   * Plotting
   * Redes neuronales
-* Hacer un lenguaje extensible y fácil de leer gracias a ANTLR.
-* Emular las funciones de `matplotlib.pyplot` para facilidad del usuario.
+
 
 ---
-
-## 9. Trabajo futuro
-
-* Añadir funciones logarítmicas y exponenciales con mayor precisión.
-* MLP multiclase y más capas.
-* Mejor visualización ASCII.
-* Exportación/importación de modelos entrenados.
-
----
-
-## 10. Autores
-
-Proyecto desarrollado como parte del curso de Compiladores.
-
----
-
-## 11. Licencia
-
-Este proyecto es de código abierto y está disponible bajo la licencia MIT.
