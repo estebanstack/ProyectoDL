@@ -1,0 +1,71 @@
+print("=== OPERACIONES BÁSICAS ===")
+print( 2 + 3 * 5 )
+print( sqrt(25) )
+print( sin(3.14159/2) )
+
+print("=== MATRICES ===")
+A = [[1,2],[3,4]]
+B = [[5,6],[7,8]]
+
+print( A + B )
+print( A - B )
+print( A * B )
+print( mat_transpose(A) )
+print( mat_inverse(A) )
+
+print("=== ARCHIVOS SIMULADOS ===")
+write_text("prueba.txt", "Hola mundo")
+append_text("prueba.txt", "\nLinea 2")
+txt = read_text("prueba.txt")
+print(txt)
+
+print("=== REGRESION LINEAL ===")
+xs = [1,2,3,4,5]
+ys = [2,4,5,4,5]
+
+params = regresion_lineal(xs, ys)
+print(params)
+
+ys_pred = predecir_lineal(xs, params)
+print(ys_pred)
+
+print(" GRAFICAS ")
+plot(xs, ys)
+plot(xs, ys_pred)
+title("Regresion lineal")
+xlabel("x")
+ylabel("y")
+show()
+
+print("=== CLASIFICACIÓN CON MLP (XOR) ===")
+X = [[0,0],[0,1],[1,0],[1,1]]
+Y = [0,1,1,0]
+
+model = create_mlp(2,4,1)
+train_mlp(model, X, Y, 0.5, 5000)
+pred = predict_mlp(model, X)
+
+print("Predicciones XOR:")
+print(pred)
+
+pred_real= predict_real_mlp(model, X)
+print(pred_real)
+
+
+print("===AGRUPAMIENTO (CLUSTERING) ===")
+Xc = [
+    [1,1],
+    [1.2,0.9],
+    [0.8,1.1],
+
+    [5,5],
+    [5.1,4.9],
+    [4.9,5.2]
+]
+
+net = create_cluster_net(2, 2)
+train_cluster_net(net, Xc, 0.2, 20)
+
+labels = predict_cluster(net, Xc)
+print("Clusters asignados:")
+print(labels)
