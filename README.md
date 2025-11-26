@@ -1,5 +1,5 @@
 <img width="769" height="483" alt="image" src="https://github.com/user-attachments/assets/d886f152-2305-49ad-8294-206b4b4c26bd" />
-
+# ESTEBAN CASTRO JUAN GONZALEZ
 
 # DLang – Lenguaje de dominio especifico para realizar procesos de Deep Learning
 
